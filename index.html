@@ -9,29 +9,30 @@
 <meta name="googlebot" content="all">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 <meta name="renderer" content="webkit">
-<title>轉盤抽獎</title>
+<title>轉盤抽獎-旋轉轉盤</title>
 <style>
     body,html{margin:0px;padding:0px;}
-    body{background-color:#333;padding:10px;}
-    .wrapper{width:100%;max-width:375px;margin:0px auto;}
-    .part2{background:url(part2-bg.png) left top no-repeat;padding-top:100%;background-size:100% 100%;position:relative;}
-    .part2 .rotate-pointer{position:absolute;top:50%;left:50%;width:30%;height:30%;margin-left:-15%;margin-top:-15%;background:url(pointer.png) center center no-repeat;background-size:100% 100%;}
+    body{background-color:rgb(138, 128, 128);}
+    .bg{background:url(Group_105.png) center top no-repeat;position:relative;padding-top: 250px;padding-bottom: 222px;}
+    .wrapper{width:100%;max-width:380px;position: relative;margin:0px auto;}
+    .part2{background:url(Group_103.png) center center no-repeat;background-size:100% 100%;padding-top:100%;}
+    .rotate-pointer{position:absolute;top:45%;left:50%;width:30%;height:30%;margin-left:-15%;margin-top:-15%;background:url(Group_106.png) center center no-repeat;background-size:100% 100%;}
 
-    #pointer {
-        transition: transform 6.5s;
-        transition-timing-function: ease-in-out;
+    .part2 {
+        transition: transform 10.5s;
+        transition-timing-function: cubic-bezier(0.50, 0, 0, 0.99); /*調整旋轉速度和起始速率*/
     }
-    a {
-        color: #fff;
-    }
+
 </style>
 </head>
 <body>
-<div class="wrapper" id = "wrapper">
-    <div class = "part2">
+<div class="bg">
+    <div class="wrapper" id = "wrapper">
+        <div class = "part2">
+            
+        </div>
         <div id = "pointer" class = "rotate-pointer" data-click = ""></div>
     </div>
-    <a href="./index-zp.html" target="_blank">轉盤抽獎</a>
 </div>
 <script src="./jquery.min.js"></script>
 <script>
@@ -40,64 +41,64 @@
     var btn = $("#pointer"),
         options = {
         };
-    var isEnd = false;
+
     // 獎品角度
     options.gifts = {
         "1":{
             id : "1",
             name : "(ETH)0.07元",
-            angleStart : 0,
-            angleEnd : 15,
+            angleStart : -30,
+            angleEnd : 14,
             tips : "恭喜您獲得(ETH)0.07元~~"
         },
         "2":{
             id : "2",
-            name : "(DOGE)0.07元", 
-            angleStart : 16,
-            angleEnd : 30,
-            tips : "恭喜您獲得(DOGE)0.07元~~"
+            name : "(BTC)0.07元", 
+            angleStart : 15,
+            angleEnd : 60,
+            tips : "恭喜您獲得(BTC)0.07元~~"
         },
         "3":{
             id : "3",
             name : "(USTD)0.07元",
-            angleStart : 31,
-            angleEnd : 45,
+            angleStart : 61,
+            angleEnd : 105,
             tips : "恭喜您獲得(USTD)0.07元~~"
         },
         "4":{
             id : "4",
-            name : "(BTC)0.07元",
-            angleStart : 46,
-            angleEnd : 60,
-            tips : "恭喜您獲得(BTC)0.07元~~"
+            name : "(DOGE)0.07元",
+            angleStart : 106,
+            angleEnd : 150,
+            tips : "恭喜您獲得(DOGE)0.07元~~"
         },
         "5":{
             id : "5",
             name : "(ETH)0.07元",
-            angleStart : 61,
-            angleEnd : 75,
+            angleStart : 151,
+            angleEnd : 195,
             tips : "恭喜您獲得(ETH)0.07元~~"
         },
         "6":{
             id : "6",
-            name : "(DOGE)0.07元",
-            angleStart : 76,
-            angleEnd : 90,
-            tips : "恭喜您獲得(DOGE)0.07元~~"
+            name : "(BTC)0.07元",
+            angleStart : 196,
+            angleEnd : 240,
+            tips : "恭喜您獲得(BTC)0.07元~~"
         },
         "7":{
             id : "7",
             name : "(USTD)0.07元",
-            angleStart : 91,
-            angleEnd : 105,
+            angleStart : 241,
+            angleEnd : 285,
             tips : "恭喜您獲得(USTD)0.07元~~"
         },
         "8":{
             id : "8",
-            name : "(BTC)0.07元",
-            angleStart : 106,
-            angleEnd : 120,
-            tips : "恭喜您獲得(BTC)0.07元~~"
+            name : "(DOGE)0.07元",
+            angleStart : 286,
+            angleEnd : 330,
+            tips : "恭喜您獲得(DOGE)0.07元~~"
         },
     };
 
@@ -108,9 +109,9 @@
     }
     function _begin(){
 
-        var base = 2160; //和transition: transform 6.5s;對應 1圈用1s
+        var base = 2160; //和transition: transform 10.5s;對應 ，先轉滿6圈
 
-        var result = getRandom(0,120); // 隨機，獲取0-120隨機數
+        var result = getRandom(-30,300); // 獲取隨機數
         
         var _key = null; // 內定獎品id
 
@@ -118,19 +119,20 @@
             result = getRandom(options.gifts[_key].angleStart,options.gifts[_key].angleEnd)
         }
 
+        // result = 40
+        var deg = (base+result)
 
-        var deg = -(base+result)
+        $(".part2").css({"transform":"rotate("+deg+"deg)"});
 
-
-
-        btn.css({"transform":"rotate("+deg+"deg)"});
-
-        btn.on('transitionend',function(){
+        $(".part2").on('transitionend',function(){
+            console.log(result)
             for (var key in options.gifts) {
 
-            if (options.gifts[key].angleStart <= result && result<=options.gifts[key].angleEnd) {
+                if (options.gifts[key].angleStart <= result && result<=options.gifts[key].angleEnd) {
+
                 confirm(options.gifts[key].tips);
                 window.location.reload()
+
                 }
             }
         })

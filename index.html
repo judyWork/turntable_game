@@ -13,10 +13,49 @@
 <style>
     body,html{margin:0px;padding:0px;}
     body{background-color:rgb(230, 230, 230);}
-    .bg{background:url(Group_105.png) center top no-repeat;position:relative;padding-top: 250px;padding-bottom: 222px;}
-    .wrapper{width:100%;max-width:380px;position: relative;margin:0px auto;}
-    .part2{background:url(Group_103.png) center center no-repeat;background-size:100% 100%;padding-top:100%;}
-    .rotate-pointer{position:absolute;top:45%;left:50%;width:30%;height:30%;margin-left:-15%;margin-top:-15%;background:url(Group_106.png) center center no-repeat;background-size:100% 100%;}
+    /* .bg{background:url(Group_105.png) center top no-repeat;padding-top: 250px;padding-bottom: 222px;} */
+    .container{
+        margin: 0 auto;
+        width: 414px;
+        height: 852px;
+        position: relative;
+    }
+    a{
+        display: block;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 16px;
+        top: 5;
+    }
+    .bg{
+        background-image: url(/Group_105.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-top: 268px;
+        padding-bottom: 204px;
+    }
+    .wrapper{
+        width:100%;
+        max-width:380px;
+        position: relative;
+        margin:0px auto;
+    }
+    .part2{background:url(Group_103.png) center center no-repeat;
+        background-size:100% 100%;
+        padding-top:100%;
+    }
+    .rotate-pointer{
+        position:absolute;
+        top:45%;
+        left:50%;
+        width:30%;
+        height:30%;
+        margin-left:-15%;
+        margin-top:-15%;
+        background:url(Group_106.png) center center no-repeat;
+        background-size:100% 100%;
+    }
 
     .part2 {
         transition: transform 10.5s;
@@ -26,12 +65,15 @@
 </style>
 </head>
 <body>
-<div class="bg">
-    <div class="wrapper" id = "wrapper">
-        <div class = "part2">
-            
+<div class="container">
+    <a href="https://judywork.github.io/Games_Lobby/"></a>
+    <div class="bg">
+        <div class="wrapper" id = "wrapper">
+            <div class = "part2">
+                
+            </div>
+            <div id = "pointer" class = "rotate-pointer" data-click = ""></div>
         </div>
-        <div id = "pointer" class = "rotate-pointer" data-click = ""></div>
     </div>
 </div>
 <script src="./jquery.min.js"></script>
